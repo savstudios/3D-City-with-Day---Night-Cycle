@@ -9,8 +9,9 @@ class Application{
       int height;
       const char *name;
 
-      Application();
+      Application(int width, int height, const char* name);
 
       void initAll();
       int createWindow();
+      void terminateAll();
 };
