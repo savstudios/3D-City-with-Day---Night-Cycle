@@ -14,4 +14,5 @@ class Application{
       void initAll();
       int createWindow();
       void terminateAll();
+      void frameBufferSizeCallback(GLFWwindow* window, int width, int height);
 };

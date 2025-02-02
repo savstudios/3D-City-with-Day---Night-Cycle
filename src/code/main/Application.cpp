@@ -2,12 +2,14 @@
 #include "header/Application.h"
 
 Application::Application(int width, int height, const char* name){
-   Application::width = width;
-   Application::height = height;
-   Application::name = name;
+   this -> width = width;
+   this -> height = height;
+   this -> name = name;
 };
 
 void Application::initAll(){
+
+   std::cout << "Initalizing!";
 
    // Init GLFW
    glfwInit();
@@ -19,6 +21,7 @@ void Application::initAll(){
 }
 
 int Application::createWindow(){
+   std::cout << "Creating window";
    Application::window = glfwCreateWindow(
       Application::width,
       Application::height,
@@ -33,9 +36,13 @@ int Application::createWindow(){
       return -1;
    }
 
+   std::cout << "Window made";
+
    glfwMakeContextCurrent(window);
 
    // Init glad
+
+   std::cout << "Loading glad!";
 
    gladLoadGL();
 
