@@ -42,6 +42,7 @@ void Renderer::attachAndLinkShader(){
 
 
    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+
    if(!success) {
       glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
    } 
@@ -54,7 +55,7 @@ void Renderer::deleteShaders(){
 
 void Renderer::linkVertAttributes(int location, int size, int stride, const void* offset){
    glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride, offset);
-   glEnableVertexAttribArray(0);
+   glEnableVertexAttribArray(location);
 }
 
 void Renderer::genVertArrays(unsigned int amnt, unsigned int* array){
