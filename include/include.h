@@ -2,6 +2,7 @@
 #pragma once
 
 #include <iostream>
+#include <math.h>
 
 // GLFW/GLAD
 

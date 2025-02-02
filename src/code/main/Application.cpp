@@ -21,7 +21,6 @@ void Application::initAll(){
 }
 
 int Application::createWindow(){
-   std::cout << "Creating window";
    Application::window = glfwCreateWindow(
       Application::width,
       Application::height,
@@ -36,13 +35,9 @@ int Application::createWindow(){
       return -1;
    }
 
-   std::cout << "Window made";
-
    glfwMakeContextCurrent(window);
 
    // Init glad
-
-   std::cout << "Loading glad!";
 
    gladLoadGL();
 
