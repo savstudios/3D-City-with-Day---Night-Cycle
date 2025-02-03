@@ -14,9 +14,9 @@ class Renderer{
       };
 
       GLuint vbo, vao;
-      GLuint vertexShader;
-      GLuint fragmentShader;
+      GLuint vertexShader, fragmentShader;
       GLuint shaderProgram;
+      GLuint texture;
 
       Renderer();
 
