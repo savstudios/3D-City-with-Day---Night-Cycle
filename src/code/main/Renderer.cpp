@@ -8,6 +8,13 @@ Renderer::Renderer(){
    vertexShader = glCreateShader(GL_VERTEX_SHADER);
    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
    shaderProgram = glCreateProgram();
+
+   // TEXTURE PARAMRS
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
 void Renderer::genBuffers(unsigned int amnt, unsigned int* array){
@@ -60,4 +67,25 @@ void Renderer::linkVertAttributes(int location, int size, int stride, const void
 
 void Renderer::genVertArrays(unsigned int amnt, unsigned int* array){
    glGenVertexArrays(amnt, array);
+}
+
+void Renderer::genAndBindTextures(GLuint texture, int amnt){
+   glGenTextures(amnt, &texture);
+   glBindTexture(GL_TEXTURE_2D, texture);
+}
+
+void Renderer::getTextureData(const char* filePath){
+   data = stbi_load(filePath, &width, &height, &numChannels, 0);
+}
+
+void Renderer::genTexture(){
+   if( data ){
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+      glGenerateMipmap(GL_TEXTURE_2D);
+   }
+   else{
+      std::cout << "Whoops, oh sh1t! Your texture weren't generated lol" << std::endl;
+   }
+
+   stbi_image_free(data);
 }

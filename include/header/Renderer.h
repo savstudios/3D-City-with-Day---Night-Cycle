@@ -6,17 +6,24 @@
 class Renderer{
    public:
 
-      float verts[18] = {
+      float verts[48] = {
          //      Verts     //    
-         -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f, // Bottom left
-          0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f, // Bottom right
-          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f  // Top middle
+         -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  0.0f, 1.0f, // Bottom left
+          0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 1.0f, // Bottom right
+         -0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f, // Top left
+
+         -0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f, // Top left
+          0.5f,  0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f, // Top right
+          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  1.0f, 1.0f, // Bottom right
       };
 
       GLuint vbo, vao;
       GLuint vertexShader, fragmentShader;
       GLuint shaderProgram;
       GLuint texture;
+
+      int width, height, numChannels;
+      unsigned char* data;
 
       Renderer();
 
@@ -27,6 +34,12 @@ class Renderer{
       void compileShader(unsigned int shader, const char* shaderSource);
       void attachAndLinkShader();
       void linkVertAttributes(int location, int size, int stride, const void* offset);
+
+      // TEXTURES
+
+      void genAndBindTextures(GLuint texture, int amnt);
+      void getTextureData(const char* filePath);
+      void genTexture();
 
       void deleteShaders();
 

@@ -7,5 +7,5 @@ class Game{
 
       Game();
 
-      void Update(GLuint shaderProgram, GLuint vao, GLFWwindow* window);
+      void Update(GLuint shaderProgram, GLuint vao, GLFWwindow* window, unsigned int texture);
 };
