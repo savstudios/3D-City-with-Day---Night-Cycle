@@ -2,4 +2,5 @@ include/GLFW/** linguist-vendored
 include/KHR/** linguist-vendored
 include/glad/** linguist-vendored
 src/glad.c linguist-vendored
-*.h linguist-language=Header
+*.h linguist-language=Objective-C
+
