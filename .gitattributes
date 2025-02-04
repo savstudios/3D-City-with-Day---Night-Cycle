@@ -2,3 +2,4 @@ include/GLFW/** linguist-vendored
 include/KHR/** linguist-vendored
 include/glad/** linguist-vendored
 src/glad.c linguist-vendored
+include/** -linguist-vendored
