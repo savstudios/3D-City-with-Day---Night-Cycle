@@ -3,6 +3,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include "include.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -24,6 +25,10 @@ class Renderer{
       GLuint vertexShader, fragmentShader;
       GLuint shaderProgram;
       GLuint texture;
+
+      glm::mat4 proj;
+      glm::mat4 model;
+      glm::mat4 view;
 
       int width, height, numChannels;
       unsigned char* data;
@@ -47,6 +52,10 @@ class Renderer{
       // Shaders
 
       GLint getUniformLocation(GLuint shaderID, const char* name);
+
+      // GLM
+
+      glm::mat4 translateMat4(glm::mat4 matrix, glm::vec3 vector);
 
       void deleteShaders();
 

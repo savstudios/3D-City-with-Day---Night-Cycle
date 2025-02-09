@@ -4,10 +4,17 @@
 int success;
 char infoLog[512];
 
+
 Renderer::Renderer(){
-   vertexShader = glCreateShader(GL_VERTEX_SHADER);
-   fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-   shaderProgram = glCreateProgram();
+   this -> vertexShader = glCreateShader(GL_VERTEX_SHADER);
+   this -> fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+   this -> shaderProgram = glCreateProgram();
+
+   this -> proj = glm::perspective(glm::radians(45.0f), 640.0f/480.0f, 0.1f, 100.0f);
+   this -> model = glm::mat4(1.0f);
+   this -> view = glm::mat4(1.0f);
+
+   this -> model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0, 0.0, 0.0));
 
    // TEXTURE PARAMRS
 
@@ -96,4 +103,8 @@ void Renderer::genTexture(){
 
 GLint Renderer::getUniformLocation(GLuint shaderID, const char* name){
    return glGetUniformLocation(shaderID, name);
+}
+
+glm::mat4 Renderer::translateMat4(glm::mat4 matrix, glm::vec3 vector){
+   return glm::translate(matrix, vector);
 }

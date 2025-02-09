@@ -29,7 +29,15 @@ int WinMain(int argc, char** argv[]){
    renderer.linkVertAttributes(2, 2, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
    while(!glfwWindowShouldClose(app.window)){
+
+      renderer.view = renderer.translateMat4(renderer.view, glm::vec3(0.0, 0.0, -3.0f));
+
       GLuint transformUniLoc = renderer.getUniformLocation(shader.Shader_ID, "transform");
+
+      GLint MVPloc = renderer.getUniformLocation(shader.Shader_ID, "viewProjModel");
+      glm::mat4 MVP = renderer.view * renderer.proj * renderer.model;
+      glUniformMatrix4fv(MVPloc, 1, GL_FALSE, glm::value_ptr(MVP));
+
       game.Update(shader.Shader_ID, renderer.vao, app.window, renderer.texture, transformUniLoc);
 
    }
