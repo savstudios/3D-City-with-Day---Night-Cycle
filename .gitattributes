@@ -2,6 +2,7 @@ include/GLFW/** linguist-vendored
 include/KHR/** linguist-vendored
 include/glad/** linguist-vendored
 include/glm/** linguist-vendored
+include/stb_image/** linguist-vendored
 src/glad.c linguist-vendored
 *.h linguist-language=objc
 *.cpp linguist-language=cpp
