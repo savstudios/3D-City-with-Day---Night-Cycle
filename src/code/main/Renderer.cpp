@@ -93,3 +93,7 @@ void Renderer::genTexture(){
 
    stbi_image_free(data);
 }
+
+GLint Renderer::getUniformLocation(GLuint shaderID, const char* name){
+   return glGetUniformLocation(shaderID, name);
+}

@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef RENDERER_H
+#define RENDERER_H
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -41,9 +44,15 @@ class Renderer{
       void getTextureData(const char* filePath);
       void genTexture();
 
+      // Shaders
+
+      GLint getUniformLocation(GLuint shaderID, const char* name);
+
       void deleteShaders();
 
    private:
 };
 
 extern Renderer renderer;
+
+#endif

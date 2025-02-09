@@ -1,3 +1,8 @@
+#pragma once
+
+#ifndef GAME_H
+#define GAME_H
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -7,5 +12,7 @@ class Game{
 
       Game();
 
-      void Update(GLuint shaderProgram, GLuint vao, GLFWwindow* window, unsigned int texture);
+      void Update(GLuint shaderProgram, GLuint vao, GLFWwindow* window, unsigned int texture, GLuint transformUniLoc);
 };
+
+#endif

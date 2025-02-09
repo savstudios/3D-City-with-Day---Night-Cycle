@@ -29,7 +29,9 @@ int WinMain(int argc, char** argv[]){
    renderer.linkVertAttributes(2, 2, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
    while(!glfwWindowShouldClose(app.window)){
-      game.Update(shader.Shader_ID, renderer.vao, app.window, renderer.texture);
+      GLuint transformUniLoc = renderer.getUniformLocation(shader.Shader_ID, "transform");
+      game.Update(shader.Shader_ID, renderer.vao, app.window, renderer.texture, transformUniLoc);
+
    }
 
    app.terminateAll();

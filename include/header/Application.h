@@ -1,3 +1,8 @@
+#pragma once
+
+#ifndef APPLICATION_H
+#define APPLICATION_H
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -16,3 +21,5 @@ class Application{
       void terminateAll();
       static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 };
+
+#endif
