@@ -23,9 +23,8 @@ int WinMain(int argc, char** argv[]){
    glBindVertexArray(renderer.vao);
    renderer.bindBuffers(renderer.vbo);
    renderer.bufferData(sizeof(renderer.verts), renderer.verts, GL_STATIC_DRAW);
-   renderer.linkVertAttributes(0, 3, 8 * sizeof(float), (void*)0);
-   renderer.linkVertAttributes(1, 3, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-   renderer.linkVertAttributes(2, 2, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+   renderer.linkVertAttributes(0, 3, 5 * sizeof(float), (void*)0);
+   renderer.linkVertAttributes(1, 2, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 
    while(!glfwWindowShouldClose(app.window)){
 
@@ -35,18 +34,22 @@ int WinMain(int argc, char** argv[]){
       }
 
       glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
-      glClear(GL_COLOR_BUFFER_BIT);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
       shader.use();
 
       glBindTexture(GL_TEXTURE_2D, renderer.texture);
 
+      glm::mat4 model = glm::mat4(1.0f);
+
+      model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+
       GLuint MVPloc = renderer.getUniformLocation(shader.Shader_ID, "viewProjModel");
-      glm::mat4 MVP = renderer.proj * renderer.view * renderer.model;
+      glm::mat4 MVP = renderer.proj * renderer.view * model;
       glUniformMatrix4fv(MVPloc, 1, GL_FALSE, glm::value_ptr(MVP));
 
       glBindVertexArray(renderer.vao);
-      glDrawArrays(GL_TRIANGLES, 0, 6);
+      glDrawArrays(GL_TRIANGLES, 0, 36);
    
       glfwSwapBuffers(app.window);
 

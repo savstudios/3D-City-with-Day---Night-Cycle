@@ -10,15 +10,62 @@
 class Renderer{
    public:
 
-      float verts[48] = {
-         //      Verts     //    
-         -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  0.0f, 1.0f, // Bottom left
-          0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 1.0f, // Bottom right
-         -0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f, // Top left
+      float verts[1000] = {
+         //      Verts       //  Textures  // 
+         
+         // Front Face
+         -0.5f, -0.5f,  0.5f,  0.0f, 1.0f, // Bottom left
+          0.5f, -0.5f,  0.5f,  1.0f, 1.0f, // Bottom right
+         -0.5f,  0.5f,  0.5f,  0.0f, 0.0f, // Top left
 
-         -0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f, // Top left
-          0.5f,  0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f, // Top right
-          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  1.0f, 1.0f, // Bottom right
+         -0.5f,  0.5f,  0.5f,  0.0f, 0.0f, // Top left
+          0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // Top right
+          0.5f, -0.5f,  0.5f,  1.0f, 1.0f, // Bottom right
+
+          // Back Face
+         -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // Bottom left
+          0.5f, -0.5f, -0.5f,  1.0f, 1.0f, // Bottom right
+         -0.5f,  0.5f, -0.5f,  0.0f, 0.0f, // Top left
+
+         -0.5f,  0.5f, -0.5f,  0.0f, 0.0f, // Top left
+          0.5f,  0.5f, -0.5f,  1.0f, 0.0f, // Top right
+          0.5f, -0.5f, -0.5f,  1.0f, 1.0f, // Bottom right
+
+         // Top Face
+         -0.5f,  0.5f,  0.5f,  0.0f, 1.0f, // Bottom left
+          0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // Bottom right
+         -0.5f,  0.5f, -0.5f,  0.0f, 0.0f, // Top left
+
+         -0.5f,  0.5f, -0.5f,  0.0f, 0.0f, // Top left
+          0.5f,  0.5f, -0.5f,  1.0f, 0.0f, // Top right
+          0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // Bottom right
+
+         // Bottom Face
+         -0.5f, -0.5f,  0.5f,  0.0f, 1.0f, // Bottom left
+          0.5f, -0.5f,  0.5f,  1.0f, 1.0f, // Bottom right
+         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Top left
+
+         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Top left
+          0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // Top right
+          0.5f, -0.5f,  0.5f,  1.0f, 1.0f, // Bottom right
+
+         // Left Face
+         -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // Bottom left
+         -0.5f, -0.5f,  0.5f,  1.0f, 1.0f, // Bottom right
+         -0.5f,  0.5f, -0.5f,  0.0f, 0.0f, // Top left
+
+         -0.5f,  0.5f, -0.5f,  0.0f, 0.0f, // Top left
+         -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // Top right
+         -0.5f, -0.5f,  0.5f,  1.0f, 1.0f, // Bottom right
+
+         // Right Face
+          0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // Bottom left
+          0.5f, -0.5f,  0.5f,  1.0f, 1.0f, // Bottom right
+          0.5f,  0.5f, -0.5f,  0.0f, 0.0f, // Top left
+
+          0.5f,  0.5f, -0.5f,  0.0f, 0.0f, // Top left
+          0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // Top right
+          0.5f, -0.5f,  0.5f,  1.0f, 1.0f, // Bottom right
       };
 
       GLuint vbo, vao;

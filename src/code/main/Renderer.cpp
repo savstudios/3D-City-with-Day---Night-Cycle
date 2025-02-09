@@ -18,6 +18,10 @@ Renderer::Renderer(){
    this -> view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
    this -> proj = glm::perspective(glm::radians(45.0f), 640.0f/480.0f, 0.1f, 100.0f);
 
+   // * Params
+
+   glEnable(GL_DEPTH_TEST);
+
    // TEXTURE PARAMRS
 
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
