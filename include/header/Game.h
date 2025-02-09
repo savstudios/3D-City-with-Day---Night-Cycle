@@ -12,7 +12,7 @@ class Game{
 
       Game();
 
-      void Update(GLuint shaderProgram, GLuint vao, GLFWwindow* window, unsigned int texture, GLuint transformUniLoc);
+      void Update();
 };
 
 #endif

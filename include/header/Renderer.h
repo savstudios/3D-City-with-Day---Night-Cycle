@@ -45,7 +45,7 @@ class Renderer{
 
       // TEXTURES
 
-      void genAndBindTextures(GLuint texture, int amnt);
+      void genAndBindTextures(GLuint& texture, int amnt);
       void getTextureData(const char* filePath);
       void genTexture();
 

@@ -1,7 +1,6 @@
 #include "include.h"
 #include "classes.h"
 
-
 int WinMain(int argc, char** argv[]){
 
    Application app(640, 480, "Hello, window!");
@@ -30,15 +29,28 @@ int WinMain(int argc, char** argv[]){
 
    while(!glfwWindowShouldClose(app.window)){
 
-      renderer.view = renderer.translateMat4(renderer.view, glm::vec3(0.0, 0.0, -3.0f));
+      GLenum err;
+      while ((err = glGetError()) != GL_NO_ERROR) {
+         std::cout << "OpenGL error: " << err << std::endl;
+      }
 
-      GLuint transformUniLoc = renderer.getUniformLocation(shader.Shader_ID, "transform");
+      glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
+      glClear(GL_COLOR_BUFFER_BIT);
 
-      GLint MVPloc = renderer.getUniformLocation(shader.Shader_ID, "viewProjModel");
-      glm::mat4 MVP = renderer.view * renderer.proj * renderer.model;
+      shader.use();
+
+      glBindTexture(GL_TEXTURE_2D, renderer.texture);
+
+      GLuint MVPloc = renderer.getUniformLocation(shader.Shader_ID, "viewProjModel");
+      glm::mat4 MVP = renderer.proj * renderer.view * renderer.model;
       glUniformMatrix4fv(MVPloc, 1, GL_FALSE, glm::value_ptr(MVP));
 
-      game.Update(shader.Shader_ID, renderer.vao, app.window, renderer.texture, transformUniLoc);
+      glBindVertexArray(renderer.vao);
+      glDrawArrays(GL_TRIANGLES, 0, 6);
+   
+      glfwSwapBuffers(app.window);
+
+      game.Update();
 
    }
 

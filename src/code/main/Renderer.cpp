@@ -10,11 +10,13 @@ Renderer::Renderer(){
    this -> fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
    this -> shaderProgram = glCreateProgram();
 
-   this -> proj = glm::perspective(glm::radians(45.0f), 640.0f/480.0f, 0.1f, 100.0f);
+   this -> proj = glm::mat4(1.0f);
    this -> model = glm::mat4(1.0f);
    this -> view = glm::mat4(1.0f);
 
-   this -> model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0, 0.0, 0.0));
+   this -> model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+   this -> view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+   this -> proj = glm::perspective(glm::radians(45.0f), 640.0f/480.0f, 0.1f, 100.0f);
 
    // TEXTURE PARAMRS
 
@@ -80,7 +82,7 @@ void Renderer::genVertArrays(unsigned int amnt, unsigned int* array){
    glGenVertexArrays(amnt, array);
 }
 
-void Renderer::genAndBindTextures(GLuint texture, int amnt){
+void Renderer::genAndBindTextures(GLuint& texture, int amnt){
    glGenTextures(amnt, &texture);
    glBindTexture(GL_TEXTURE_2D, texture);
 }
@@ -103,8 +105,4 @@ void Renderer::genTexture(){
 
 GLint Renderer::getUniformLocation(GLuint shaderID, const char* name){
    return glGetUniformLocation(shaderID, name);
-}
-
-glm::mat4 Renderer::translateMat4(glm::mat4 matrix, glm::vec3 vector){
-   return glm::translate(matrix, vector);
 }
