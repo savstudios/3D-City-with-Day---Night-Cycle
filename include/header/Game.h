@@ -10,9 +10,16 @@ class Game{
 
    public:
 
+      float deltaTime = 0.0f;
+      float lastFrame = 0.0f;
+
       Game();
 
-      void Update();
+      void Update(GLFWwindow* window);
+      void processInput(GLFWwindow* window);
+      void calculateDeltaTime();
 };
+
+extern Game game;
 
 #endif

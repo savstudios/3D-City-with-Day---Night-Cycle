@@ -7,6 +7,10 @@ CODE = src/main.cpp\
 		 src/code/main/Game.cpp\
 		 src/code/main/Renderer.cpp\
 		 src/code/main/Shader.cpp\
+		 src/code/main/Camera.cpp\
 
 all:
-	g++ -o Game $(CODE) -Iinclude -Llib -lglfw3dll
+	g++ -Wall -g -o Game $(CODE) -Iinclude -Llib -lglfw3dll
+
+clean:
+	rm -f *.o Game

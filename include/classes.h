@@ -6,5 +6,6 @@
 #include "header/Game.h"
 #include "header/Renderer.h"
 #include "header/Shader.h"
+#include "header/Camera.h"
 
 #endif
