@@ -9,6 +9,16 @@ class Camera{
    public:
 
       Camera();
+      
+      // Camera floats
+      const float sensitivity = 0.1f;
+
+      // Camera numbers for rotation
+      bool firstMouse = true;
+
+      float lastX = 320, lastY = 240;
+      float yaw = -90.0f;
+      float pitch = 0.0f;
 
       // How much the camera moves every frame
       float speed = 2.5f * game.deltaTime;

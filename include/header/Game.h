@@ -17,6 +17,7 @@ class Game{
 
       void Update(GLFWwindow* window);
       void processInput(GLFWwindow* window);
+      static void processMouseInput(GLFWwindow* window, double xPos, double yPos);
       void calculateDeltaTime();
 };
 

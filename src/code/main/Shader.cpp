@@ -3,7 +3,7 @@
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath){
 
-   Renderer renderer;
+   Renderer renderer(640, 480);
    
    std::string vertexCode;
    std::string fragmentCode;

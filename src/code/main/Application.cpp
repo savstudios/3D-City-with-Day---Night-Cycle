@@ -1,5 +1,5 @@
 #include "include.h"
-#include "header/Application.h"
+#include "classes.h"
 
 Application::Application(int width, int height, const char* name){
    this -> width = width;
@@ -42,6 +42,10 @@ int Application::createWindow(){
    gladLoadGL();
 
    glViewport(0, 0, Application::width, Application::height);
+
+   glfwSetInputMode(this -> window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+   glfwSetCursorPosCallback(this -> window, Game::processMouseInput);
 
    return 0;
 }

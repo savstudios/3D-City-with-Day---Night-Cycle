@@ -13,14 +13,44 @@ void Game::Update(GLFWwindow* window){
 
 void Game::processInput(GLFWwindow* window){
    std::cout << "Calculating Input!\n";
-   if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){ std::cout << "W key\n"; camera.position += camera.speed * camera.front; }
-   if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){ std::cout << "S key\n"; camera.position -= camera.speed * camera.front; }
-   if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){ std::cout << "A key\n"; camera.position -= glm::normalize(glm::cross(camera.front, camera.up)) * camera.speed; }
-   if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){ std::cout << "D key\n"; camera.position += glm::normalize(glm::cross(camera.front, camera.up)) * camera.speed; }
+   if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){ camera.position += camera.speed * camera.front; }
+   if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){ camera.position -= camera.speed * camera.front; }
+   if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){ camera.position -= glm::normalize(glm::cross(camera.front, camera.up)) * camera.speed; }
+   if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){ camera.position += glm::normalize(glm::cross(camera.front, camera.up)) * camera.speed; }
+}
+
+void Game::processMouseInput(GLFWwindow* window, double xPos, double yPos){
+
+   if(camera.firstMouse){
+      camera.lastX = xPos;
+      camera.lastY = yPos;
+      camera.firstMouse = false;
+   }
+
+   float xOffset = xPos - camera.lastX;
+   float yOffset = camera.lastY - yPos;
+
+   camera.lastX = xPos;
+   camera.lastY = yPos;
+
+   xOffset *= camera.sensitivity;
+   yOffset *= camera.sensitivity;
+
+   camera.yaw += xOffset;
+   camera.pitch += yOffset;
+
+   if(camera.pitch > 89.0f) camera.pitch = 89.0f;
+   if(camera.pitch < -89.0f) camera.pitch = -89.0f;
+
+   glm::vec3 direction;
+   direction.x = cos(glm::radians(camera.yaw)) * cos(glm::radians(camera.pitch));
+   direction.y = sin(glm::radians(camera.pitch));
+   direction.z = sin(glm::radians(camera.yaw)) * cos(glm::radians(camera.pitch));
+
+   camera.front = glm::normalize(direction);
 }
 
 void Game::calculateDeltaTime(){
-   std::cout << "Calculating DT!\n";
    float currentFrame = glfwGetTime();
    this -> deltaTime = currentFrame - this -> lastFrame;
    this -> lastFrame = currentFrame;

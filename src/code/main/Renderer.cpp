@@ -5,7 +5,8 @@ int success;
 char infoLog[512];
 
 
-Renderer::Renderer(){
+Renderer::Renderer(int width, int height){
+
    this -> vertexShader = glCreateShader(GL_VERTEX_SHADER);
    this -> fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
    this -> shaderProgram = glCreateProgram();
@@ -16,7 +17,7 @@ Renderer::Renderer(){
 
    this -> model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
    this -> view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-   this -> proj = glm::perspective(glm::radians(45.0f), 640.0f/480.0f, 0.1f, 100.0f);
+   this -> proj = glm::perspective(glm::radians(45.0f), (float)width/(float)height, 0.1f, 100.0f);
 
    // * Params
 

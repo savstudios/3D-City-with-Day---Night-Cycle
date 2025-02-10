@@ -9,7 +9,7 @@ int WinMain(int argc, char** argv[]){
    app.initAll();
    app.createWindow();
 
-   Renderer renderer;
+   Renderer renderer(app.width, app.height);
    
    glfwSetFramebufferSizeCallback(app.window, app.framebuffer_size_callback);
    
@@ -30,10 +30,6 @@ int WinMain(int argc, char** argv[]){
 
    while(!glfwWindowShouldClose(app.window)){
 
-      std::cout << camera.position.x << " " << camera.position.y << " " << camera.position.z << "\n";
-      std::cout << camera.front.x << " " << camera.front.y << " " << camera.front.z << "\n";
-      std::cout << camera.up.x << " " << camera.up.y << " " << camera.up.z << "\n";
-
       glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -51,10 +47,22 @@ int WinMain(int argc, char** argv[]){
       );
 
       GLuint MVPloc = renderer.getUniformLocation(shader.Shader_ID, "viewProjModel");
-      glm::mat4 MVP = renderer.proj * renderer.view * renderer.model;
-      glUniformMatrix4fv(MVPloc, 1, GL_FALSE, glm::value_ptr(MVP));
 
       glBindVertexArray(renderer.vao);
+      for(unsigned int i = 0; i < 10; i++)
+      {
+         renderer.model = glm::mat4(1.0f);
+         renderer.model = glm::translate(renderer.model, renderer.cubePositions[i]);
+
+         float angle = 20.0f * i; 
+
+         renderer.model = glm::rotate(renderer.model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+         
+         glm::mat4 MVP = renderer.proj * renderer.view * renderer.model;
+         glUniformMatrix4fv(MVPloc, 1, GL_FALSE, glm::value_ptr(MVP));
+      
+         glDrawArrays(GL_TRIANGLES, 0, 36);
+      }
       glDrawArrays(GL_TRIANGLES, 0, 36);
    
       glfwSwapBuffers(app.window);
