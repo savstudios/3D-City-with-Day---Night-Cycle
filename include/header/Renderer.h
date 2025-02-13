@@ -11,61 +11,49 @@ class Renderer{
    public:
 
       float verts[1000] = {
-         //      Verts       //
+         //      Verts       //      Normals      //
          
-         // Front Face
-         -0.5f, -0.5f,  0.5f, // Bottom left
-          0.5f, -0.5f,  0.5f, // Bottom right
-         -0.5f,  0.5f,  0.5f, // Top left
-
-         -0.5f,  0.5f,  0.5f, // Top left
-          0.5f,  0.5f,  0.5f, // Top right
-          0.5f, -0.5f,  0.5f, // Bottom right
-
-          // Back Face
-         -0.5f, -0.5f, -0.5f, // Bottom left
-          0.5f, -0.5f, -0.5f, // Bottom right
-         -0.5f,  0.5f, -0.5f, // Top left
-
-         -0.5f,  0.5f, -0.5f, // Top left
-          0.5f,  0.5f, -0.5f, // Top right
-          0.5f, -0.5f, -0.5f, // Bottom right
-
-         // Top Face
-         -0.5f,  0.5f,  0.5f, // Bottom left
-          0.5f,  0.5f,  0.5f, // Bottom right
-         -0.5f,  0.5f, -0.5f, // Top left
-
-         -0.5f,  0.5f, -0.5f, // Top left
-          0.5f,  0.5f, -0.5f, // Top right
-          0.5f,  0.5f,  0.5f, // Bottom right
-
-         // Bottom Face
-         -0.5f, -0.5f,  0.5f, // Bottom left
-          0.5f, -0.5f,  0.5f, // Bottom right
-         -0.5f, -0.5f, -0.5f, // Top left
-
-         -0.5f, -0.5f, -0.5f, // Top left
-          0.5f, -0.5f, -0.5f, // Top right
-          0.5f, -0.5f,  0.5f, // Bottom right
-
-         // Left Face
-         -0.5f, -0.5f, -0.5f, // Bottom left
-         -0.5f, -0.5f,  0.5f, // Bottom right
-         -0.5f,  0.5f, -0.5f, // Top left
-
-         -0.5f,  0.5f, -0.5f, // Top left
-         -0.5f,  0.5f,  0.5f, // Top right
-         -0.5f, -0.5f,  0.5f, // Bottom right
-
-         // Right Face
-          0.5f, -0.5f, -0.5f, // Bottom left
-          0.5f, -0.5f,  0.5f, // Bottom right
-          0.5f,  0.5f, -0.5f, // Top left
-
-          0.5f,  0.5f, -0.5f, // Top left
-          0.5f,  0.5f,  0.5f, // Top right
-          0.5f, -0.5f,  0.5f, // Bottom right
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+    
+        -0.5f, -0.5f,  0.5f,   0.0f,  0.0f, 1.0f,
+         0.5f, -0.5f,  0.5f,   0.0f,  0.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,   0.0f,  0.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,   0.0f,  0.0f, 1.0f,
+        -0.5f,  0.5f,  0.5f,   0.0f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,   0.0f,  0.0f, 1.0f,
+    
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+    
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+    
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+    
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
       };
 
       glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 2.0f);

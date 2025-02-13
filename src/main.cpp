@@ -25,13 +25,14 @@ int WinMain(int argc, char** argv[]){
    glBindVertexArray(renderer.vao);
    renderer.bindBuffers(renderer.vbo);
    renderer.bufferData(sizeof(renderer.verts), renderer.verts, GL_STATIC_DRAW);
-   renderer.linkVertAttributes(0, 3, 3 * sizeof(float), (void*)0);
+   renderer.linkVertAttributes(0, 3, 6 * sizeof(float), (void*)0);
+   renderer.linkVertAttributes(1, 3, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 
    GLuint lightVAO;
    renderer.genVertArrays(1, &lightVAO);
    glBindVertexArray(lightVAO);
    glBindBuffer(GL_ARRAY_BUFFER, renderer.vbo);
-   renderer.linkVertAttributes(0, 3, 3 * sizeof(float), (void*)0);
+   renderer.linkVertAttributes(0, 3, 6 * sizeof(float), (void*)0);
    
 
    while(!glfwWindowShouldClose(app.window)){
@@ -43,6 +44,8 @@ int WinMain(int argc, char** argv[]){
       
       glUniform3f(glGetUniformLocation(shader.Shader_ID, "lightColor"), 1.0f, 1.0f, 1.0f);
       glUniform3f(glGetUniformLocation(shader.Shader_ID, "objColor"), 1.0f, 0.5f, 0.31f);
+      glUniform3fv(glGetUniformLocation(shader.Shader_ID, "lightPos"), 1, &renderer.lightPos[0]);
+      glUniform3fv(glGetUniformLocation(shader.Shader_ID, "viewPos"), 1, &camera.position[0]);
       
       glBindTexture(GL_TEXTURE_2D, renderer.texture);
       
@@ -56,8 +59,10 @@ int WinMain(int argc, char** argv[]){
       );
       
       GLuint MVPloc = renderer.getUniformLocation(shader.Shader_ID, "viewProjModel");
+      GLuint cubeModelLoc = renderer.getUniformLocation(shader.Shader_ID, "model");
       glm::mat4 MVP = renderer.proj * renderer.view * renderer.model;
       glUniformMatrix4fv(MVPloc, 1, GL_FALSE, glm::value_ptr(MVP));
+      glUniformMatrix4fv(cubeModelLoc, 1, GL_FALSE, glm::value_ptr(renderer.model));
 
       glBindVertexArray(renderer.vao);
       glDrawArrays(GL_TRIANGLES, 0, 36);
