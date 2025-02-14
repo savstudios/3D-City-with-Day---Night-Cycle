@@ -87,18 +87,28 @@ void Renderer::genVertArrays(unsigned int amnt, unsigned int* array){
    glGenVertexArrays(amnt, array);
 }
 
-void Renderer::genAndBindTextures(GLuint& texture, int amnt){
-   glGenTextures(amnt, &texture);
-   glBindTexture(GL_TEXTURE_2D, texture);
-}
+unsigned int Renderer::genTexture(const char* filePath){
 
-void Renderer::getTextureData(const char* filePath){
-   data = stbi_load(filePath, &width, &height, &numChannels, 0);
-}
+   unsigned int texture;
+   glGenTextures(1, &texture);
 
-void Renderer::genTexture(){
+   int width, height, numChannels;
+   unsigned char* data = stbi_load(filePath, &width, &height, &numChannels, 0);
+
    if( data ){
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+      GLenum format;
+      switch (numChannels){
+         case 1:
+            format = GL_RED; break;
+         case 3:
+            format = GL_RGB; break;
+         case 4:
+            format = GL_RGBA; break;
+      }
+
+      glBindTexture(GL_TEXTURE_2D, texture);
+      glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
       glGenerateMipmap(GL_TEXTURE_2D);
    }
    else{
@@ -106,6 +116,8 @@ void Renderer::genTexture(){
    }
 
    stbi_image_free(data);
+
+   return texture;
 }
 
 GLint Renderer::getUniformLocation(GLuint shaderID, const char* name){

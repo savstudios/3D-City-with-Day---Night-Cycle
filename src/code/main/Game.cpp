@@ -4,15 +4,12 @@
 Game::Game(){};
 
 void Game::Update(GLFWwindow* window){
-
-   std::cout << "Updated!\n";
    glfwPollEvents();
    this -> processInput(window);
    this -> calculateDeltaTime();
 };
 
 void Game::processInput(GLFWwindow* window){
-   std::cout << "Calculating Input!\n";
    if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){ camera.position += camera.speed * camera.front; }
    if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){ camera.position -= camera.speed * camera.front; }
    if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){ camera.position -= glm::normalize(glm::cross(camera.front, camera.up)) * camera.speed; }
@@ -54,6 +51,5 @@ void Game::calculateDeltaTime(){
    float currentFrame = glfwGetTime();
    this -> deltaTime = currentFrame - this -> lastFrame;
    this -> lastFrame = currentFrame;
-   std::cout << this -> deltaTime;
    camera.speed = 2.5f * this -> deltaTime;
 }
