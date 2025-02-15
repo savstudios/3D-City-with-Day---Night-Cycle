@@ -44,8 +44,6 @@ int WinMain(int argc, char** argv[]){
 
       shader.use();
       
-      shader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-      shader.setVec3("objColor", 1.0f, 1.0f, 1.0f);
       shader.setVec3("lightPos", renderer.lightPos);
       shader.setVec3("viewPos", camera.position);
 
@@ -60,6 +58,10 @@ int WinMain(int argc, char** argv[]){
 
       shader.setInt("material.diffuse", 0);
       shader.setInt("material.specular", 1);
+
+      shader.setFloat("light.constant", 1.0f);
+      shader.setFloat("light.linear", 0.09f);
+      shader.setFloat("light.quadratic", 0.032f);
       
       renderer.model = glm::mat4(1.0f);
       renderer.view = glm::mat4(1.0f);
@@ -69,10 +71,6 @@ int WinMain(int argc, char** argv[]){
          camera.position + camera.front,
          camera.up
       );
-      
-      glm::mat4 MVP = renderer.proj * renderer.view * renderer.model;
-      shader.setMat4("viewProjModel", MVP);
-      shader.setMat4("model", renderer.model);
 
       glActiveTexture(GL_TEXTURE0);
       glBindTexture(GL_TEXTURE_2D, normalTex);
@@ -80,7 +78,18 @@ int WinMain(int argc, char** argv[]){
       glBindTexture(GL_TEXTURE_2D, specularTex);
 
       glBindVertexArray(renderer.vao);
-      glDrawArrays(GL_TRIANGLES, 0, 36);
+
+      for(unsigned int i = 0; i < 10; i++){
+         renderer.model = glm::mat4(1.0f);
+         renderer.model = glm::translate(renderer.model, renderer.cubePositions[i]);
+         float angle = 20.0f * i;
+         renderer.model = glm::rotate(renderer.model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+         glm::mat4 MVP = renderer.proj * renderer.view * renderer.model;
+         shader.setMat4("viewProjModel", MVP);
+         shader.setMat4("model", renderer.model);
+
+         glDrawArrays(GL_TRIANGLES, 0, 36);
+      }
       
       lightShader.use();
       glm::mat4 lightModel = glm::mat4(1.0f);
@@ -96,7 +105,6 @@ int WinMain(int argc, char** argv[]){
       glfwSwapBuffers(app.window);
 
       game.Update(app.window);
-
    }
 
    app.terminateAll();
